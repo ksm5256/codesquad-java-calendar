@@ -19,8 +19,12 @@ public class CalendarExam4 {
 			System.out.println("달을 입력해주세요.");
 			System.out.print(PROMPT);
 			month = sc.nextInt();
-				if (month == -1)
+				if (month == -1) {
 					break;
+				}
+				if (month > 12) { // 13이상 수 입력했을 때 에러 방지
+					continue;
+				}
 			System.out.printf("%d월은 %d일 까지 있습니다.\n" , month , cal.maxDaysOfMonth(month));
 		}
 		System.out.println("-end-");
