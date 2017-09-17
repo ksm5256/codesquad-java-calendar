@@ -5,16 +5,17 @@ public class Calendar {
 	public final int[] Leap_maxDays = {0, 31, 29, 30, 31, 31, 30, 31, 31, 30, 31, 30, 31};
 	
 	/*
-	 * 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2017 365d
-	 * 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2018 365d
-	 * 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2019 365d
-	 * 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2020 366d
-	 * 1. 그 해의 연도가 4의 배수가 아니면, 평년으로 2월은 28일까지만 있다. -> 4의 배수면 2월은 29일까지
-     * 2. 만약 연도가 4의 배수이면서 100의 배수가 아니면, 윤일(2월 29일)을 도입한다.
-     * 3. 만약 연도가 100의 배수이면서 400의 배수가 아닐 때, 이 해는 평년으로 생각한다.
-     * 4. 만약 연도가 400의 배수이면, 윤일(2월 29일)을 도입한다.
+	 * @ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2017 365d
+	 * @ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2018 365d
+	 * @ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2019 365d
+	 * @ 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 -2020 366d
+	 * @ 1. 그 해의 연도가 4의 배수가 아니면, 평년으로 2월은 28일까지만 있다. -> 4의 배수면 2월은 29일까지
+     * @ 2. 만약 연도가 4의 배수이면서 100의 배수가 아니면, 윤일(2월 29일)을 도입한다.
+     * @ 3. 만약 연도가 100의 배수이면서 400의 배수가 아닐 때, 이 해는 평년으로 생각한다.
+     * @ 4. 만약 연도가 400의 배수이면, 윤일(2월 29일)을 도입한다.
 	 */
 	
+	/* 윤년을 계산해주는 메소드 */
 	public boolean isLeapYear (int year) {
 		if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
 			return true;
@@ -22,6 +23,7 @@ public class Calendar {
 		return false;
 	}
 	
+	/* maxDays, Leap_maxDays 배열값 이용. isLeapYear메소드에서 윤년과 평년인 달을 리턴해주는 메소드 */
 	public int maxDaysOfMonth(int year, int month) {
 		if (isLeapYear(year)) {
 			return Leap_maxDays[month];
@@ -29,10 +31,11 @@ public class Calendar {
 		return maxDays[month];
 	}
 	
+	/* 달력 출력하는 메소드 */
 	public void printCalendar (int year, int month) {
 		/* 
-		 * printf = print formatted 약자
-		 * \n 줄바꿈 \r home \t tab 
+		 * @ printf = print formatted 약자
+		 * @ \n 줄바꿈 \r home \t tab 
 		 * */
 		System.out.printf("    <<%6d %3d>>\n", year , month);
 		System.out.println("Hello Calendar");
@@ -89,9 +92,10 @@ public class Calendar {
 //		System.out.println(" 29  30  31                ");
 	}
 	
+	/* 요일(Weekday)을 자동으로 잡아주고 알려주는 메소드 */
 	private int getWeekDay(int year, int month, int day) {
 		int sampleYear = 1900;	//1900
-		final int STANDARD_WEEKDAY = 0; //1990/JAN/1st = Monday
+		final int STANDARD_WEEKDAY = 0; //1990/JAN/1st = Monday(0), Tuesday(1), Wednesday(2)
 		
 		int count = 0; // 총 일수(total days count)
 		
